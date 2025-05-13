@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Login</title>
+  <style>
+    .alert {
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+    }
+    .alert.error {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+    .alert.success {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+  </style>
+</head>
+<body>
+<h2>Login</h2>
+
+<!-- Сообщения об ошибках и успешной регистрации -->
+<div th:if="${param.error}" class="alert error">Invalid username or password</div>
+<div th:if="${param.registered}" class="alert success">Registration successful! Please login</div>
+<div th:if="${param.logout}" class="alert success">You have been logged out</div>
+
+<!-- Форма логина -->
+<form th:action="@{/login}" method="post">
+  <div>
+    <label>Username:</label>
+    <input type="text" name="username" required>
+  </div>
+  <div>
+    <label>Password:</label>
+    <input type="password" name="password" required>
+  </div>
+  <button type="submit">Login</button>
+</form>
+
+<!-- Ссылка на регистрацию -->
+<p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+</body>
+</html>
