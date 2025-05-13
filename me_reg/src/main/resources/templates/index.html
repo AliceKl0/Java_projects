@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    <style>
+        /* Фиксируем ширину столбцов и предотвращаем смещение */
+        table {
+            table-layout: fixed;
+            width: 600px;
+        }
+        td:nth-child(1) { width: 50px; } /* ID */
+        td:nth-child(2) { width: 300px; } /* Имя и форма */
+        td:nth-child(3) { width: 150px; } /* Кнопки действий */
+
+        /* Стили для переключения режимов (обычный и режим редактирования) */
+        .edit-form {
+            display: none;
+            margin-top: 5px;
+        }
+        .editing .view-mode { display: none; }
+        .editing .edit-form { display: block; }
+
+        /* Фиксируем кнопки в одну линию */
+        .actions {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr th:each="row:${rows}"
+        th:classappend="${editId == row.id} ? 'editing'">
+        <!-- Столбец ID -->
+        <td th:text="${row.id}"/>
+
+        <!-- Столбец имени с формой редактирования -->
+        <td>
+            <span class="view-mode" th:text="${row.name}"/>
+            <form class="edit-form" method="post"
+                  th:action="@{/update/{id}(id=${row.id})}">
+                <input type="text" name="name" th:value="${row.name}"/>
+                <button type="submit">Update</button>
+                <a href="/">Cancel</a>
+            </form>
+        </td>
+
+        <!-- Столбец действий -->
+        <td class="actions">
+            <!-- Кнопки Delete и Edit всегда в одной строке -->
+            <a th:href="@{/delete/{id}(id=${row.id})}">Delete</a>
+            <a th:href="@{/edit/{id}(id=${row.id})}">Edit</a>
+        </td>
+    </tr>
+</table>
+
+<!-- Форма добавления нового сотрудника -->
+<form method="post" th:action="@{/add}" th:object="${new_employee}">
+    <input type="text" th:field="*{name}" placeholder="New name"/>
+    <button type="submit">Add</button>
+</form>
+</body>
+</html>
