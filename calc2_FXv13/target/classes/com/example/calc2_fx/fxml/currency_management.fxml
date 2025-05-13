@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.calc2_fx.controller.CurrencyManagementController">
+
+    <Button text="На главную" onAction="#handleBackToMain"/>
+
+    <TableView fx:id="ratesTable" editable="true">
+        <columns>
+            <TableColumn text="From" fx:id="fromColumn">
+                <cellValueFactory><PropertyValueFactory property="fromCurrency"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="To" fx:id="toColumn">
+                <cellValueFactory><PropertyValueFactory property="toCurrency"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Rate" fx:id="rateColumn">
+                <cellValueFactory><PropertyValueFactory property="rate"/></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <ComboBox fx:id="fromCurrency" promptText="From" editable="true"/>
+        <ComboBox fx:id="toCurrency" promptText="To" editable="true"/>
+        <TextField fx:id="rateField" promptText="Rate"/>
+        <Button text="Add/Update" onAction="#handleAddOrUpdate"/>
+        <Button text="Delete" onAction="#handleDelete"/>
+    </HBox>
+</VBox>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.calc2_fx.controller.HistoryController"
+      spacing="10"
+      style="-fx-padding: 10;"
+      alignment="CENTER">
+
+    <Label text="История операций:" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
+    <ListView fx:id="historyList" prefHeight="400" prefWidth="600"/>
+
+    <Button text="На главную" onAction="#handleBackToMain"
+            style="-fx-font-size: 14; -fx-pref-width: 120;"/>
+</VBox>
